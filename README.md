@@ -1,7 +1,5 @@
-# api-pc-variable
-# Документация API: Module
 
-## Конструктор
+# API: Module
 ### new Module(name, description, toggleable, category, callbacks)
 Создает новый модуль.
 
