@@ -129,7 +129,7 @@
 | enabled | boolean |
 | notify  | boolean |
 
- #API: Global
+ # API: Global
 ## Методы
 
 ### addTextToClipboard(text)
