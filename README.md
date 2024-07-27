@@ -128,3 +128,62 @@
 |---------|---------|
 | enabled | boolean |
 | notify  | boolean |
+
+ #API: Global
+## Методы
+
+### addTextToClipboard(text)
+Копирует текст в буфер обмена.
+
+#### Параметры:
+| Name  | Type   |
+|-------|--------|
+| text  | string |
+
+### getTextFromClipboard()
+Возвращает текущий скопированный текст из буфера обмена.
+
+#### Возвращает:
+| Type   | Description    |
+|--------|----------------|
+| string | text           |
+
+### isInGame()
+Проверяет, находится ли локальный игрок в уровне (игре).
+
+#### Возвращает:
+| Type    | Description   |
+|---------|---------------|
+| boolean | Is playing?   |
+
+### log(text)
+Записывает текст в logs.txt.
+
+#### Параметры:
+| Name  | Type   |
+|-------|--------|
+| text  | string |
+
+### notification(text)
+Создает и отображает уведомление.
+
+#### Параметры:
+| Name  | Type   |
+|-------|--------|
+| text  | string |
+
+### preventDefault()
+Предотвращает выполнение хука.
+
+### vkCodeToString(code)
+Разрешает VK-код в строку.
+
+#### Параметры:
+| Name  | Type      |
+|-------|-----------|
+| code  | Constants#VK |
+
+#### Возвращает:
+| Type   | Description     |
+|--------|-----------------|
+| string | Resolved code   |
