@@ -187,3 +187,50 @@
 | Type   | Description     |
 |--------|-----------------|
 | string | Resolved code   |
+
+# API: Ability
+
+## Описание
+Ability представляет собой игровую способность локального игрока (например, полет, проход сквозь стены, строительство и т. д.).
+
+## Методы
+
+### getAddress()
+Возвращает адрес в памяти.
+
+#### Возвращает:
+| Type   | Description  |
+|--------|--------------|
+| number | Address      |
+
+### getBoolean()
+Возвращает значение типа boolean.
+
+#### Возвращает:
+| Type    | Description  |
+|---------|--------------|
+| boolean | value        |
+
+### getNumber()
+Возвращает значение типа number.
+
+#### Возвращает:
+| Type   | Description  |
+|--------|--------------|
+| number | value        |
+
+### setBoolean(value)
+Устанавливает значение типа boolean.
+
+#### Параметры:
+| Name  | Type    |
+|-------|---------|
+| value | boolean |
+
+### setNumber(value)
+Устанавливает значение типа number.
+
+#### Параметры:
+| Name  | Type   |
+|-------|--------|
+| value | number |
