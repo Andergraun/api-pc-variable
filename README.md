@@ -1,1 +1,132 @@
 # api-pc-variable
+# Документация API: Module
+
+## Конструктор
+### new Module(name, description, toggleable, category, callbacks)
+Создает новый модуль.
+
+### Параметры:
+| Name        | Type                     | Description           |
+|-------------|--------------------------|-----------------------|
+| name        | string                   | Название модуля       |
+| description | string                   | Описание модуля       |
+| toggleable  | boolean                  | Возможность переключения |
+| category    | ModuleCategory \| number | Категория модуля      |
+| callbacks   | object                   | Объект колбэков       |
+
+### Callbacks:
+| Name    | Type     |
+|---------|----------|
+| onClick | function |
+
+## Методы
+
+### addSetting(setting)
+Добавляет настройку.
+
+#### Параметры:
+| Name    | Type    |
+|---------|---------|
+| setting | Setting |
+
+### getCategory()
+Возвращает категорию.
+
+#### Возвращает:
+| Type                     | Description     |
+|--------------------------|-----------------|
+| Constants#ModuleCategory | category        |
+
+### getDescription()
+Возвращает описание.
+
+#### Возвращает:
+| Type   | Description   |
+|--------|---------------|
+| string | description   |
+
+### getKeybind()
+Возвращает клавишу привязки.
+
+#### Возвращает:
+| Type                    | Description |
+|-------------------------|-------------|
+| Constants#VK \| null    | keybind     |
+
+### getName()
+Возвращает название.
+
+#### Возвращает:
+| Type   | Description |
+|--------|-------------|
+| string | name        |
+
+### getSetting(index)
+Возвращает указанную настройку.
+
+#### Параметры:
+| Name  | Type   |
+|-------|--------|
+| index | number |
+
+#### Возвращает:
+| Type    | Description |
+|---------|-------------|
+| Setting | setting     |
+
+### getSettings()
+Возвращает все настройки.
+
+#### Возвращает:
+| Type         | Description |
+|--------------|-------------|
+| ArraySetting | settings    |
+
+### hasSettings()
+Проверяет наличие настроек.
+
+#### Возвращает:
+| Type    | Description     |
+|---------|-----------------|
+| boolean | has_settings    |
+
+### isEnabled()
+Проверяет включен ли модуль.
+
+#### Возвращает:
+| Type    | Description |
+|---------|-------------|
+| boolean | enabled     |
+
+### isToggleable()
+Проверяет можно ли переключать модуль.
+
+#### Возвращает:
+| Type    | Description   |
+|---------|---------------|
+| boolean | toggleable    |
+
+### removeSetting(setting)
+Удаляет настройку.
+
+#### Параметры:
+| Name    | Type    |
+|---------|---------|
+| setting | Setting |
+
+### setKeybind(keybind)
+Устанавливает привязку клавиши.
+
+#### Параметры:
+| Name    | Type      |
+|---------|-----------|
+| keybind | Constants#VK |
+
+### toggle(enabled, notify)
+Переключает состояние модуля.
+
+#### Параметры:
+| Name    | Type    |
+|---------|---------|
+| enabled | boolean |
+| notify  | boolean |
