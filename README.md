@@ -1329,4 +1329,611 @@ Using these functions incorrectly can lead to crashes or unexpected behavior. It
     * **Returns:** 
         * Type: `Tag | null`
         * Description: The `Tag` object if found at the address, otherwise `null`. 
-* `trySetBlock(address, value)`: Attempts to write a `Block
+... (continued)
+
+* `trySetBlock(address, value)`: Attempts to write a `Block` object to the specified memory address.
+    * **Parameters:**
+        * `address`: `number` -  The memory address to write to.
+        * `value`: `Block` -  The `Block` object to write. 
+* `trySetEffect(address, value)`: Attempts to write an `Effect` object to the specified memory address.
+    * **Parameters:**
+        * `address`: `number` -  The memory address to write to. 
+        * `value`: `Effect` - The `Effect` object to write. 
+* `trySetEntity(address, value)`:  Attempts to write an `Entity` object to the specified memory address. 
+    * **Parameters:**
+        * `address`: `number` -  The memory address to write to. 
+        * `value`: `Entity` - The `Entity` object to write. 
+* `trySetItem(address, value)`:  Attempts to write an `Item` object to the specified memory address.
+    * **Parameters:**
+        * `address`: `number` - The memory address to write to. 
+        * `value`: `Item` -  The `Item` object to write.
+* `trySetPacket(address, value)`: Attempts to write a `Packet` object to the specified memory address. 
+    * **Parameters:**
+        * `address`: `number` - The memory address to write to.
+        * `value`: `Packet` -  The `Packet` object to write. 
+* `trySetString(address, value)`: Attempts to write a string to the specified memory address.
+    * **Parameters:**
+        * `address`: `number` -  The memory address to write to.
+        * `value`: `string` -  The string to write. 
+* `trySetTag(address, value)`: Attempts to write a `Tag` object to the specified memory address. 
+    * **Parameters:**
+        * `address`: `number` - The memory address to write to. 
+        * `value`: `Tag` -  The `Tag` object to write.
+* `virtualProtect(address, length, protect)`: Modifies the memory protection attributes of a region of memory.
+    * **Parameters:**
+        * `address`: `number` - The starting memory address of the region.
+        * `length`: `number` - The size of the memory region, in bytes. 
+        * `protect`: `number` -  The desired memory protection flags. See [Microsoft Documentation](https://learn.microsoft.com/ru-ru/windows/win32/api/memoryapi/nf-memoryapi-virtualprotect) for details. 
+    * **Returns:** 
+        * Type: `number`
+        * Description: The previous memory protection value of the region. 
+* `write(address, bytes)`:  Writes an array of bytes to the specified memory address.
+    * **Parameters:**
+        * `address`: `number` - The memory address to write to.
+        * `bytes`: `number[]` -  The array of bytes to write. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description:  `true` if the write was successful, `false` otherwise.
+
+### Module
+
+Represents a cheat module with configurable settings.
+
+**Constructor:**
+
+```javascript
+new Module(name, description, toggleable, category, callbacks)
+```
+| Parameter | Type | Description |
+|---|---|---|
+| `name` | `string` | The name of the module. |
+| `description` | `string` | A description of the module's functionality. |
+| `toggleable` | `boolean` | Whether the module can be toggled on and off. |
+| `category` | `ModuleCategory | number` |  The category the module belongs to. |
+| `callbacks` | `object` | An object containing callback functions for various events related to the module. 
+     |  | `onClick`: `function`  - A function to be called when the module is clicked. |
+
+**Methods:**
+
+* `addSetting(setting)`:  Adds a setting to the module. 
+    * **Parameters:**
+        * `setting`: `Setting` - The `Setting` object to add. 
+* `getCategory()`: Returns the category the module belongs to.
+    * **Returns:** 
+        * Type: `Constants#ModuleCategory`
+        * Description: The module's category.
+* `getDescription()`:  Returns the description of the module. 
+    * **Returns:** 
+        * Type: `string`
+        * Description: The module's description. 
+* `getKeybind()`:  Returns the keybind (Virtual Key code) associated with toggling the module, if any. 
+    * **Returns:** 
+        * Type: `Constants#VK | null`
+        * Description: The keybind, or `null` if no keybind is set.
+* `getName()`:  Returns the name of the module. 
+    * **Returns:** 
+        * Type: `string`
+        * Description: The module's name.
+* `getSetting(index)`: Returns the `Setting` object at the specified index in the module's settings list. 
+    * **Parameters:**
+        * `index`: `number` -  The index of the setting to retrieve. 
+    * **Returns:** 
+        * Type: `Setting`
+        * Description:  The `Setting` object. 
+* `getSettings()`:  Returns an array of all `Setting` objects associated with the module. 
+    * **Returns:** 
+        * Type: `Setting[]`
+        * Description: An array of `Setting` objects.
+* `hasSettings()`: Checks if the module has any settings defined. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if the module has settings, `false` otherwise. 
+* `isEnabled()`:  Checks if the module is currently enabled. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if enabled, `false` otherwise. 
+* `isToggleable()`: Checks if the module can be toggled on and off.
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if toggleable, `false` otherwise. 
+* `removeSetting(setting)`:  Removes the specified setting from the module. 
+    * **Parameters:**
+        * `setting`: `Setting` -  The `Setting` object to remove. 
+* `setKeybind(keybind)`:  Sets the keybind (Virtual Key code) for toggling the module. 
+    * **Parameters:**
+        * `keybind`: `VK` - The new keybind. 
+* `toggle(enabled, notify)`: Toggles the module on or off. 
+    * **Parameters:**
+        * `enabled` (optional): `boolean` -  If provided, sets the module to the specified enabled state. 
+        * `notify` (optional): `boolean` - If `true`, displays a notification indicating the change in the module's state. 
+
+### ModuleManager
+
+Manages the cheat's collection of modules.
+
+**Methods (all static):**
+
+* `addModule(module)`:  Registers a module with the cheat, making it available for use.
+    * **Parameters:**
+        * `module`: `Module` -  The `Module` object to register.
+* `getModule(name)`: Retrieves a module by its name.
+    * **Parameters:**
+        * `name`: `string` -  The name of the module to find.
+    * **Returns:** 
+        * Type: `Module`
+        * Description: The `Module` object, or `null` if not found. 
+* `getModules()`: Returns an array of all registered modules.
+    * **Returns:** 
+        * Type: `Module[]`
+        * Description: An array of `Module` objects. 
+* `removeModule(module)`:  Unregisters a module from the cheat. 
+    * **Parameters:**
+        * `module`: `Module` - The `Module` object to unregister. 
+
+### OverlayObject
+
+Represents an object within the cheat's overlay system.
+
+**Constructor:**
+
+```javascript
+new OverlayObject(identifier, position, callbacks) 
+```
+
+| Parameter | Type | Description |
+|---|---|---|
+| `identifier` | `string` | A unique identifier for the overlay object. |
+| `position` | `number[]` | The initial position of the object within the overlay as [x, y]. |
+| `callbacks` | `object` |  An object containing callback functions for events. 
+     |  | `onDraw`: `function` -  A function to be called when the object needs to be rendered. |
+
+**Methods:**
+
+* `focus()`:  Brings the object into focus, typically used for handling input. 
+* `getHeight()`:  Returns the height of the object. 
+    * **Returns:** 
+        * Type: `number`
+        * Description: The object's height.
+* `getId()`:  Returns the unique identifier of the object.
+    * **Returns:** 
+        * Type: `string`
+        * Description: The object's identifier.
+* `getPos()`: Returns the current position of the object within the overlay.
+    * **Returns:** 
+        * Type: `number[]`
+        * Description: The position as [x, y].
+* `getPosX()`:  Returns the X-coordinate of the object's position. 
+    * **Returns:** 
+        * Type: `number`
+        * Description:  The X-coordinate. 
+* `getPosY()`:  Returns the Y-coordinate of the object's position.
+    * **Returns:** 
+        * Type: `number`
+        * Description: The Y-coordinate. 
+* `getSize()`:  Returns the size of the object. 
+    * **Returns:** 
+        * Type: `number[]`
+        * Description:  The size as [width, height].
+* `getWidth()`:  Returns the width of the object.
+    * **Returns:** 
+        * Type: `number`
+        * Description: The object's width.
+* `hide()`:  Stops the object from being rendered in the overlay. 
+* `isDragging()`: Checks if the object is currently being dragged by the user. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if dragging, `false` otherwise. 
+* `isFocused()`: Checks if the object is currently in focus. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description:  `true` if focused, `false` otherwise. 
+* `isHovered()`: Checks if the mouse cursor is currently hovering over the object. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description:  `true` if hovered, `false` otherwise.
+* `isShowing()`:  Checks if the object is currently being rendered (visible) in the overlay. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if visible, `false` otherwise. 
+* `setHeight(height)`: Sets the height of the object. 
+    * **Parameters:**
+        * `height`: `number` -  The new height. 
+* `setPos(pos)`: Sets the position of the object within the overlay.
+    * **Parameters:**
+        * `pos`: `number[]` - The new position as [x, y]. 
+* `setPosX(posX)`:  Sets the X-coordinate of the object's position. 
+    * **Parameters:**
+        * `posX`: `number` -  The new X-coordinate.
+* `setPosY(posY)`: Sets the Y-coordinate of the object's position.
+    * **Parameters:**
+        * `posY`: `number` -  The new Y-coordinate. 
+* `setSize(size)`: Sets the size of the object. 
+    * **Parameters:**
+        * `size`: `number[]` -  The new size as [width, height]. 
+* `setWidth(width)`:  Sets the width of the object.
+    * **Parameters:**
+        * `width`: `number` -  The new width. 
+* `show()`:  Makes the object visible and rendered in the overlay.
+
+### OverlaySystem
+
+Manages the cheat's graphical overlay, which is displayed over the game screen.
+
+**Methods (all static):**
+
+* `getFocusedObject()`:  Returns the overlay object that currently has focus. 
+    * **Returns:** 
+        * Type: `OverlayObject`
+        * Description:  The focused `OverlayObject`.
+* `getHoveredObject()`: Returns the overlay object that the mouse cursor is currently hovering over, or `null` if none. 
+    * **Returns:** 
+        * Type: `OverlayObject | null`
+        * Description:  The hovered `OverlayObject`.
+* `getObject(identifier)`:  Retrieves an overlay object by its unique identifier.
+    * **Parameters:**
+        * `identifier`: `string` -  The identifier of the object. 
+    * **Returns:** 
+        * Type: `OverlayObject`
+        * Description:  The `OverlayObject` with the matching identifier.
+* `getObjects()`: Returns an array of all registered overlay objects. 
+    * **Returns:** 
+        * Type: `OverlayObject[]`
+        * Description:  An array of `OverlayObject`s.
+* `getObjectsUnderMouse()`:  Returns an array of all overlay objects that are currently under the mouse cursor, or `null` if none.
+    * **Returns:** 
+        * Type: `OverlayObject[] | null`
+        * Description:  An array of `OverlayObject`s under the mouse.
+* `registerObject(object)`: Adds an overlay object to the system.
+    * **Parameters:**
+        * `object`: `OverlayObject` -  The `OverlayObject` to register.
+* `unregisterObject(object)`:  Removes an overlay object from the system. 
+    * **Parameters:**
+        * `object`: `OverlayObject` - The `OverlayObject` to unregister.
+
+### Renderer
+
+Provides functions for rendering graphics on the game screen, both in 2D and 3D. 
+
+**Methods (all static):**
+
+* `drawBlock(pos, posX, posY, size)`:  Renders a block at a specified 2D screen position. 
+    * **Parameters:**
+        * `pos`: `number[]` - The block's world position as [x, y, z]. 
+        * `posX`: `number` - The X-coordinate on the screen where the block should be rendered. 
+        * `posY`: `number` -  The Y-coordinate on the screen where the block should be rendered.
+        * `size`: `number` -  The size of the rendered block.
+* `drawBox3D(startPos, endPos, color, thickness)`: Draws a 3D box outline in the game world. 
+    * **Parameters:**
+        * `startPos`: `number[]` - The starting corner of the box as [x, y, z].
+        * `endPos`: `number[]` - The ending corner of the box as [x, y, z].
+        * `color`: `number[]` - The color of the box as [red, green, blue, alpha]. Values should be in the range 0-1.
+        * `thickness`: `number` - The thickness of the box lines.
+* `drawBox3D(startPos, endPos, color)`: Draws a filled 3D box in the game world.
+    * **Parameters:**
+        * `startPos`: `number[]` - The starting corner of the box as [x, y, z]. 
+        * `endPos`: `number[]` - The ending corner of the box as [x, y, z].
+        * `color`: `number[]` - The color of the box as [red, green, blue, alpha]. Values should be in the range 0-1.
+* `drawFilledRect(startPos, endPos, color, thickness)`:  Draws a filled 2D rectangle on the screen.
+    * **Parameters:**
+        * `startPos`: `number[]` -  The top-left corner of the rectangle as [x, y]. 
+        * `endPos`: `number[]` -  The bottom-right corner of the rectangle as [x, y].
+        * `color`: `number[]` - The color of the rectangle as [red, green, blue, alpha]. Values should be in the range 0-1.
+        * `thickness`: `number` - The thickness of the rectangle's border (if applicable).
+* `drawItem(item, posX, posY, size, enchanted)`:  Renders an item at a specified 2D screen position.
+    * **Parameters:**
+        * `item`: `Item` - The `Item` object to render. 
+        * `posX`: `number` - The X-coordinate on the screen where the item should be rendered. 
+        * `posY`: `number` - The Y-coordinate on the screen where the item should be rendered. 
+        * `size`: `number` - The size of the rendered item. 
+        * `enchanted`: `boolean` -  If `true`, renders the item with an enchantment glint. 
+* `drawLine(startPos, endPos, color, thickness)`: Draws a 2D line on the screen.
+    * **Parameters:**
+        * `startPos`: `number[]` - The starting point of the line as [x, y]. 
+        * `endPos`: `number[]` - The ending point of the line as [x, y].
+        * `color`: `number[]` - The color of the line as [red, green, blue, alpha]. Values should be in the range 0-1.
+        * `thickness`: `number` -  The thickness of the line. 
+* `drawLine3D(startPos, endPos, color, thickness)`:  Draws a 3D line in the game world. 
+    * **Parameters:**
+        * `startPos`: `number[]` - The starting point of the line as [x, y, z].
+        * `endPos`: `number[]` - The ending point of the line as [x, y, z]. 
+        * `color`: `number[]` - The color of the line as [red, green, blue, alpha]. Values should be in the range 0-1.
+        * `thickness`: `number` - The thickness of the line. 
+* `drawOutlineBox3D(startPos, endPos, color, thickness)`:  Draws a 3D box outline in the game world. 
+    * **Parameters:**
+        * `startPos`: `number[]` - The starting corner of the box as [x, y, z].
+        * `endPos`: `number[]` -  The ending corner of the box as [x, y, z].
+        * `color`: `number[]` - The color of the outline as [red, green, blue, alpha]. Values should be in the range 0-1.
+        * `thickness`: `number` -  The thickness of the outline lines. 
+* `drawRect(startPos, endPos, color, thickness)`: Draws a 2D rectangle outline on the screen. 
+    * **Parameters:**
+        * `startPos`: `number[]` - The top-left corner of the rectangle as [x, y].
+        * `endPos`: `number[]` -  The bottom-right corner of the rectangle as [x, y].
+        * `color`: `number[]` -  The color of the outline as [red, green, blue, alpha]. Values should be in the range 0-1. 
+        * `thickness`: `number` - The thickness of the outline lines. 
+* `drawText(text, pos, color, rotation, size)`: Draws text on the screen in Minecraft style.
+    * **Parameters:**
+        * `text`: `string` - The text to draw.
+        * `pos`: `number[]` -  The position where the text should be drawn as [x, y].
+        * `color`: `number[]` - The color of the text as [red, green, blue, alpha]. Values should be in the range 0-1. 
+        * `rotation`: `number` -  The rotation of the text in degrees. 
+        * `size`: `number` -  The font size of the text.
+* `drawTexture(texture, pos, size, uv, uvSize)`: Draws a portion of a texture on the screen.
+    * **Parameters:**
+        * `texture`: `Texture` -  The `Texture` object to draw from. 
+        * `pos`: `number[]` - The position where the texture should be drawn as [x, y]. 
+        * `size`: `number[]` - The size of the rendered texture portion as [width, height]. 
+        * `uv`: `number[]` - The coordinates within the texture to start drawing from, as [u, v]. 
+        * `uvSize`: `number[]` - The size of the portion to draw from the texture as [width, height]. 
+* `getTextHeight(text, size)`:  Calculates and returns the height of the provided text using the specified font size.
+    * **Parameters:**
+        * `text`: `string` -  The text to measure.
+        * `size`: `number` -  The font size.
+    * **Returns:** 
+        * Type: `number`
+        * Description: The text height. 
+* `getTextSize(text, size)`:  Calculates and returns the size (width and height) of the provided text.
+    * **Parameters:**
+        * `text`: `string` -  The text to measure. 
+        * `size`: `number` -  The font size.
+    * **Returns:** 
+        * Type: `number[]`
+        * Description:  The text size as [width, height]. 
+* `getTextWidth(text, size)`:  Calculates and returns the width of the provided text using the specified font size. 
+    * **Parameters:**
+        * `text`: `string` -  The text to measure.
+        * `size`: `number` - The font size. 
+    * **Returns:** 
+        * Type: `number`
+        * Description: The text width. 
+* `setClippingRects(rect)`: Defines a rectangular clipping region, preventing rendering outside of this area. Restore the clipping region immediately after rendering to avoid unexpected behavior.
+    * **Parameters:**
+        * `rect`: `number[]` - The clipping rectangle as [from_x, from_y, to_x, to_y]. 
+* `worldToScreen(pos, screenPos)`: Converts 3D world coordinates to 2D screen coordinates.
+    * **Parameters:**
+        * `pos`: `number[]` - The 3D world coordinates as [x, y, z]. 
+        * `screenPos`: `number[]` - An array to store the resulting 2D screen coordinates.
+    * **Returns:** 
+        * Type: `boolean`
+        * Description:  `true` if the conversion was successful, `false` otherwise (e.g., if the point is behind the camera). 
+
+### Tessellator
+
+Provides low-level access to the game's rendering system, allowing for custom geometry drawing.
+
+**Warning:**  This class is intended for advanced users who understand rendering concepts. Using it incorrectly can lead to visual glitches or crashes.
+
+**Methods (all static):**
+
+* `begin(mode, vertexCount)`: Begins defining a new batch of geometry to be rendered. 
+    * **Parameters:**
+        * `mode`: `number` - The rendering mode (e.g., triangles, lines). 
+        * `vertexCount`: `number` - The expected number of vertices in this batch.
+* `color(color)`: Sets the color for subsequent vertices in the batch.
+    * **Parameters:**
+        * `color`: `number[]` - The color as [red, green, blue, alpha]. Values should be in the range 0-1.
+* `draw(material, texture)`: Renders the defined geometry batch using the specified material and texture (optional). 
+    * **Parameters:**
+        * `material`: `number` - The memory address of the material to use. 
+        * `texture` (optional): `Texture` -  The texture to apply to the geometry.
+* `getAddress()`: Returns the memory address of the `Tessellator` object.
+    * **Returns:** 
+        * Type: `number`
+        * Description: The memory address.
+* `vertex(vertex)`: Adds a vertex to the current geometry batch. 
+    * **Parameters:**
+        * `vertex`: `number[]` - The vertex coordinates as [x, y, z]. 
+
+### Texture
+
+Represents a texture loaded into the game. 
+
+**Methods:**
+
+* `isLoaded()`:  Checks if the texture has been successfully loaded and is not the default "missing texture" image. 
+    * **Returns:** 
+        * Type: `boolean`
+        * Description: `true` if loaded, `false` otherwise.
+
+
+## Hooks
+
+Hooks are functions that are automatically called by the cheat at specific points during the game's execution. 
+You can define your own functions to be executed as hooks, allowing you to modify game behavior or inject your own logic.
+
+**Note:** Some hooks are "preventable," meaning you can use the `preventDefault()` function within the hook to stop the game from performing its default action.
+
+**Hooks:**
+
+* `onAttack(victim)`: Called right before the local player attacks an entity. 
+    * **Parameters:**
+        * `victim`: `Entity` - The target entity being attacked.
+    * Preventable: `true`
+* `onChat(text)`: Called before a chat message is sent to the server.
+    * **Parameters:**
+        * `text`: `string` - The chat message.
+    * Preventable: `true`
+* `onConnect(ip, port)`: Called when connecting to a game server.
+    * **Parameters:**
+        * `ip`: `string` - The server's IP address.
+        * `port`: `number` - The server's port. 
+* `onContainerTick(container)`: Called every tick while a container (e.g., chest) is open. 
+    * **Parameters:**
+        * `container`: `Container` -  The `Container` object. 
+* `onContinueDestroyBlock(posX, posY, posZ, side, block)`: Called every tick while the player is continuing to break a block.
+    * **Parameters:**
+        * `posX`: `number` -  The X-coordinate of the block (block position, not pointed coordinates). 
+        * `posY`: `number` -  The Y-coordinate of the block. 
+        * `posZ`: `number` - The Z-coordinate of the block. 
+        * `side`: `BlockSide` -  The side of the block being broken. 
+        * `block`: `Block` -  The `Block` object being broken.
+    * Preventable: `true` 
+* `onDisconnect()`:  Called when disconnecting from a game server. 
+* `onEffectAdded(effect)`:  Called when a status effect is applied to an entity. 
+    * **Parameters:**
+        * `effect`: `Effect` - The `Effect` object representing the applied effect.
+* `onEffectRemoved(effect)`:  Called when a status effect is removed from an entity.
+    * **Parameters:**
+        * `effect`: `Effect` - The `Effect` object representing the removed effect.
+* `onEffectUpdated(effect)`:  Called when a status effect on an entity is updated (e.g., its duration or amplifier changes). 
+    * **Parameters:**
+        * `effect`: `Effect` - The `Effect` object representing the updated effect.
+* `onKeyClick(button, pressed)`: Called when a keyboard key is pressed or released.
+    * **Parameters:**
+        * `button`: `VK` -  The Virtual Key code of the key.
+        * `pressed`: `boolean` -  `true` if the key was pressed, `false` if released.
+    * Preventable: `true`
+* `onMouseClick(posX, posY, key, pressed)`: Called when a mouse button is pressed or released.
+    * **Parameters:**
+        * `posX`: `number` - The X-coordinate of the mouse cursor. 
+        * `posY`: `number` - The Y-coordinate of the mouse cursor. 
+        * `key`: `number` - The mouse button code (e.g., 1 - left button, 2 - right button). 
+        * `pressed`: `boolean` - `true` if the button was pressed, `false` if released. 
+    * Preventable: `true`
+* `onMouseMove(posX, posY)`:  Called when the mouse cursor moves.
+    * **Parameters:**
+        * `posX`: `number` -  The new X-coordinate of the mouse cursor.
+        * `posY`: `number` -  The new Y-coordinate of the mouse cursor.
+    * Preventable: `true` 
+* `onMouseWheelSpin(up)`: Called when the mouse wheel is scrolled. 
+    * **Parameters:**
+        * `up`: `boolean` - `true` if the wheel was scrolled up, `false` if scrolled down.
+    * Preventable: `true` 
+* `onPostRender()`: Called after the cheat's main menu has been rendered. Often used for drawing custom elements in the overlay.
+* `onPreRender()`:  Called before the cheat's main menu is rendered.  
+* `onReceivePacket(packet)`: Called before a network packet is processed by the client.
+    * **Parameters:**
+        * `packet`: `Packet` -  The incoming `Packet` object. 
+    * Preventable: `true`
+* `onRender3D()`: Called every frame to allow for 3D rendering within the game world. 
+* `onScriptDisable()`:  Called when the cheat script is disabled (e.g., unloaded or reloaded).
+* `onScriptEnable()`: Called when the cheat script is enabled (e.g., loaded or reloaded).
+* `onSendPacket(packet)`:  Called before a network packet is sent to the server. 
+    * **Parameters:**
+        * `packet`: `Packet` - The outgoing `Packet` object.
+    * Preventable: `true`
+* `onStartDestroyBlock(posX, posY, posZ, side, block)`: Called when the player starts breaking a block. 
+    * **Parameters:**
+        * `posX`: `number` -  The X-coordinate of the block.
+        * `posY`: `number` - The Y-coordinate of the block.
+        * `posZ`: `number` -  The Z-coordinate of the block.
+        * `side`: `BlockSide` - The side of the block being broken.
+        * `block`: `Block` - The `Block` object being broken. 
+    * Preventable: `true` 
+* `onStopDestroyBlock()`: Called when the player stops breaking a block. 
+    * Preventable: `true`
+* `onTick()`: Called every game tick. The default tick rate is 20 ticks per second, but this can be modified by the `Timer` module or changes in game speed. 
+* `onUseItem(item, posX, posY, posZ, side, offsetX, offsetY, offsetZ, block)`: Called when the player uses an item (typically by right-clicking). 
+    * **Parameters:**
+        * `item`: `Item` - The `Item` object being used. 
+        * `posX`: `number` - The X-coordinate of the block being interacted with. 
+        * `posY`: `number` - The Y-coordinate of the block. 
+        * `posZ`: `number` -  The Z-coordinate of the block.
+        * `side`: `BlockSide` - The side of the block.
+        * `offsetX`: `number` -  The offset from `posX` to the exact point of interaction (since `posX` is an integer block position). 
+        * `offsetY`: `number` -  The offset from `posY`.
+        * `offsetZ`: `number` -  The offset from `posZ`.
+        * `block`: `Block` - The `Block` object being interacted with.
+    * Preventable: `true` 
+
+## Packets
+
+This section provides information about classes related to network packets.
+
+**Classes:**
+
+ * `AdventureSettingsPacket`
+ * `AnimatePacket`
+ * `AttributeData`
+ * `AvailableCommandsPacket`
+ * `BlockEntityDataPacket`
+ * `ChangeDimensionPacket`
+ * `ChunkRadiusUpdatedPacket`
+ * `CommandStepPacket`
+ * `ContainerClosePacket`
+ * `ContainerOpenPacket`
+ * `ContainerSetSlotPacket`
+ * `DisconnectPacket`
+ * `DropItemPacket`
+ * `EntityEventPacket`
+ * `EntityFallPacket`
+ * `FullChunkDataPacket`
+ * `HurtArmorPacket`
+ * `InteractPacket`
+ * `ItemFrameDropItemPacket`
+ * `LevelEventPacket`
+ * `LevelSoundEventPacket`
+ * `MapInfoRequestPacket`
+ * `MobArmorEquipmentPacket`
+ * `MobEffectPacket`
+ * `MobEquipmentPacket`
+ * `MovePlayerPacket`
+ * `Packet`: The base class for all packets. 
+ * `PlayStatusPacket`
+ * `PlayerActionPacket`
+ * `PlayerInputPacket`
+ * `PlayerListEntry`
+ * `PlayerListPacket`
+ * `RemoveBlockPacket`
+ * `RemoveEntityPacket`
+ * `RequestChunkRadiusPacket`
+ * `RespawnPacket`
+ * `SetDifficultyPacket`
+ * `SetEntityLinkPacket`
+ * `SetEntityMotionPacket`
+ * `SetHealthPacket`
+ * `SetPlayerGameTypePacket`
+ * `SetTimePacket`
+ * `SetTitlePacket`
+ * `ShowCreditsPacket`
+ * `TakeItemEntityPacket`
+ * `TextPacket`
+ * `TransferPacket`
+ * `UpdateAttributesPacket`
+ * `UpdateBlockPacket`
+ * `UseItemPacket`
+
+
+## Settings 
+
+This section provides classes for creating and managing settings for cheat modules.
+
+**Classes:**
+
+* `ButtonSetting` 
+* `ColorSetting`
+* `ContainerSetting`
+* `EnumEntry`
+* `EnumSetting`
+* `KeySetting`
+* `Setting`: The base class for all settings. 
+* `SliderSetting`
+* `SwitchSetting`
+* `TextSetting`
+
+## Tags
+
+This section describes classes for working with NBT (Named Binary Tag) data, which is used to store information about items. 
+
+**Classes:**
+
+* `ByteTag`
+* `CompoundTag`
+* `DoubleTag`
+* `FloatTag`
+* `Int64Tag`
+* `IntTag`
+* `ListTag`
+* `ShortTag`
+* `StringTag`
+
+## Constants
+
+Constants are used to represent fixed values that have specific meanings within the game or the cheat. They are organized into classes (enums) for better clarity and readability.
+
+**Constant Classes:**
+
+* `AbilityType`: Describes types of player abilities (e.g., `FLYING`, `NOCLIP`).
+* `ArmorSlot`: Represents different armor slots (e.g., `HELMET`, `CHESTPLATE`).
+* `Block`: Contains constants for all block types in the game (e.g., `STONE`, `GRASS`).
+* `BlockSide`:  Describes the sides of a block (e.g., `UP`, `DOWN`).
+* `ContainerSlots`: Represents different slots within containers (e.g., `INVENTORY`, `HOTBAR
